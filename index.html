@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Ladli Sakshi 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts animation */
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 6s infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Animated Character */
+        .character {
+            position: fixed;
+            font-size: 80px;
+            z-index: 100;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .character-left {
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                transform: translateY(-60%) scale(1.1);
+            }
+        }
+
+        /* Speech bubble for character */
+        .speech-bubble {
+            position: fixed;
+            background: white;
+            padding: 20px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            z-index: 101;
+            animation: slideIn 0.5s ease;
+            font-size: 1.1em;
+            color: #333;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .speech-left {
+            left: 150px;
+            top: 30%;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: white;
+        }
+
+        .speech-left::after {
+            left: -10px;
+            top: 50%;
+            transform: rotate(-90deg);
+        }
+
+        .character-name {
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 5px;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #d63384;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .letter-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            font-size: 1.5em;
+            color: #d63384;
+            margin-top: 30px;
+        }
+
+        .reveal-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .reveal-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        .reveal-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Modal/Pop-up styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: modalSlideIn 0.5s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-character {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: characterBounce 1s infinite;
+        }
+
+        @keyframes characterBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .modal-content h2 {
+            color: #d63384;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .close-btn, .next-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        .close-btn {
+            background: #fff;
+            color: #d63384;
+            border: 2px solid #d63384;
+        }
+
+        .close-btn:hover {
+            background: #d63384;
+            color: white;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: emojiSpin 2s infinite;
+        }
+
+        @keyframes emojiSpin {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(15deg) scale(1.1);
+            }
+        }
+
+        /* Welcome screen */
+        .welcome-screen {
+            display: flex;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+
+        .welcome-content h1 {
+            font-size: 4em;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-content .characters {
+            font-size: 120px;
+            margin: 30px 0;
+            animation: pandaBounce 1.5s infinite;
+        }
+
+        @keyframes pandaBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+            }
+        }
+
+        .welcome-content p {
+            font-size: 1.8em;
+            margin: 20px 0;
+        }
+
+        .enter-btn {
+            margin-top: 40px;
+            padding: 25px 60px;
+            font-size: 1.5em;
+            background: white;
+            color: #764ba2;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .character {
+                font-size: 50px;
+            }
+
+            .character-left {
+                left: 10px;
+            }
+
+            .speech-bubble {
+                font-size: 0.9em;
+                max-width: 200px;
+                padding: 15px;
+            }
+
+            .speech-left {
+                left: 70px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .letter-content {
+                font-size: 1.1em;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 30px 20px;
+            }
+
+            .modal-content h2 {
+                font-size: 1.8em;
+            }
+
+            .modal-content p {
+                font-size: 1.2em;
+            }
+
+            .welcome-content h1 {
+                font-size: 2.5em;
+            }
+
+            .welcome-content .characters {
+                font-size: 80px;
+            }
+
+            .welcome-content p {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1>💕 Happy Valentine's Day! 💕</h1>
+            <div class="characters">🐼</div>
+            <p>Hello Sakshi! 😊</p>
+            <p>I have something very special for you...</p>
+            <button class="enter-btn" onclick="enterSite()">Let's Go! ✨</button>
+        </div>
+    </div>
+
+    <!-- Floating hearts background -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Animated Character -->
+    <div class="character character-left" id="charLeft" style="display: none;">🐼</div>
+
+    <!-- Speech Bubble -->
+    <div class="speech-bubble speech-left" id="speechLeft" style="display: none;">
+        <div class="character-name">Panda 🐼</div>
+        <div id="leftText">Welcome Sakshi!</div>
+    </div>
+
+    <!-- Main letter container -->
+    <div class="container" style="display: none;" id="mainContainer">
+        <h1>💕 To My Beautiful Sakshi 💕</h1>
+        
+        <div class="letter-content">
+            <p>My Dearest Moti, My Ladli,</p>
+            
+            <p>From the very first moment I saw you at our coaching institute, my heart knew you were special. That day - July 29, 2024 - changed my life forever. When I asked you for that assignment on the road, it was just an excuse to talk to you. Little did I know that one conversation would lead to the most beautiful journey of my life.</p>
+            
+            <p>Sakshi, these 1 year, 6 months, and 16 days with you have been nothing short of magical. I remember that dark night in the heavy rain when you were in my arms, and we were hugging each other - that moment is forever etched in my heart. Every memory we've created together, from Nahargarh to watching reels, from your "I Don't" replies to those WhatsApp stickers that make me smile - everything about you is precious to me.</p>
+            
+            <p>You're not just my girlfriend, Sakshi - you're my guide, my motivator, my support system. Your intelligence amazes me, your cuteness melts my heart, and the way you're completely real and open with me makes me feel like the luckiest person alive. You teach me when I'm wrong, you care for me when I'm careless, and you make me a better person every single day.</p>
+            
+            <p>I dream of our future together - both of us working in the Ministry of External Affairs in Delhi, building a beautiful life side by side. That dream keeps me going, Sakshi. You're my present and my future, my everything.</p>
+            
+            <p>I love you more than words could ever express, and I promise to show you that love every single day.</p>
+            
+            <div class="signature">Forever Yours,<br>Your Love 💝</div>
+        </div>
+
+        <button class="reveal-btn" onclick="startCompliments()">
+            ✨ Click Here Sakshi - I Have Surprises For You! ✨
+        </button>
+    </div>
+
+    <!-- Modal for compliments -->
+    <div id="complimentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-character">🐼</div>
+            <div class="emoji" id="modalEmoji">💖</div>
+            <h2 id="modalTitle">You Are Amazing!</h2>
+            <p class="modal-subtitle" id="modalSubtitle">Panda says:</p>
+            <p id="modalText">Click next to see more...</p>
+            <button class="next-btn" onclick="nextCompliment()">Next Surprise 💕</button>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Character dialogues for different stages
+        const characterDialogues = {
+            welcome: "Hi Sakshi! I'm Panda! 🐼 I'm here to guide you through something special!",
+            readLetter: "Sakshi, read this beautiful letter written just for you! 💌",
+            beforeCompliments: "Ready for surprises, Sakshi? I have so many things to tell you! 🎁"
+        };
+
+        function updateCharacterSpeech(stage) {
+            if (window.innerWidth > 768) {
+                document.getElementById('leftText').innerHTML = characterDialogues[stage];
+                document.getElementById('speechLeft').style.display = 'block';
+                
+                setTimeout(() => {
+                    document.getElementById('speechLeft').style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function enterSite() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'block';
+            document.getElementById('charLeft').style.display = 'block';
+            
+            setTimeout(() => {
+                updateCharacterSpeech('welcome');
+            }, 500);
+
+            setTimeout(() => {
+                updateCharacterSpeech('readLetter');
+            }, 6000);
+
+            // Create hearts continuously
+            setInterval(createHeart, 300);
+        }
+
+        // Personalized compliments based on their real story
+        const compliments = [
+            {
+                emoji: '🌟',
+                title: 'Sakshi, It All Started on July 29, 2024',
+                text: 'Sakshi, do you remember that day at our coaching institute? The moment I saw you for the first time, I fell in love. That was the day my life changed forever. 1 year, 6 months, and 16 days later, my love for you has only grown stronger! 💕'
+            },
+            {
+                emoji: '💬',
+                title: 'Sakshi, That Assignment Changed Everything',
+                text: 'Remember when I asked you for an assignment on that road? That was just an excuse to talk to you, Sakshi! Little did I know that one conversation would lead to the most beautiful journey of my life. You made my heart skip a beat that day! 😊'
+            },
+            {
+                emoji: '🌧️',
+                title: 'Sakshi, Our Most Magical Moment',
+                text: 'That dark night, heavy rain, and you in my arms... Sakshi, I will NEVER forget that moment. Hugging you under the rain felt like the whole world disappeared. It\'s the memory I treasure most in my heart. That was pure magic! ✨💑'
+            },
+            {
+                emoji: '🧠',
+                title: 'Sakshi, You\'re So Smart!',
+                text: 'Sakshi, your intelligence amazes me every single day! You\'re so smart by brain, and I love how you think, how you solve problems, and how you see the world. Beauty with brains - that\'s you, my love! 💫'
+            },
+            {
+                emoji: '🥰',
+                title: 'Sakshi, You\'re The Cutest!',
+                text: 'Moti! Ladli! You know what I love most about you, Sakshi? How cute you are - my adorable chubby girl! Every time I see you, my heart melts. You\'re the most beautiful person in my world! 💖'
+            },
+            {
+                emoji: '👑',
+                title: 'Sakshi, You\'re Real Only With Me',
+                text: 'What makes you unique, Sakshi? You\'re completely open and real only in front of me. That trust, that comfort, that authenticity - it makes me feel so special. Thank you for being yourself with me, always! 🌸'
+            },
+            {
+                emoji: '💪',
+                title: 'Sakshi, You Make Me Better',
+                text: 'You\'re not just my girlfriend, Sakshi - you\'re my guide, my motivator, my support system! When I do something wrong, you teach me. When I\'m careless, you care for me. You make me a better person every day! Thank you for everything! 🙏💕'
+            },
+            {
+                emoji: '😄',
+                title: 'Sakshi, "I Don\'t" Makes Me Smile',
+                text: 'Every time I say "I love you" and you reply "I Don\'t" with those WhatsApp stickers, Sakshi, I can\'t stop smiling! 😂 Your playful nature, your jokes, your way of making me laugh - that\'s what brightens my every day! You\'re my happiness! ✨'
+            },
+            {
+                emoji: '🌈',
+                title: 'Sakshi, Our Dream - MEA, Delhi, Together',
+                text: 'Sakshi, I dream of us working together in the Ministry of External Affairs in Delhi, living our lives side by side. That dream keeps me going! You\'re not just my present, you\'re my future. And I can\'t wait to build that beautiful life with you! Forever and always! 💝🐼'
+            }
+        ];
+
+        let currentCompliment = 0;
+        const modal = document.getElementById('complimentModal');
+
+        function startCompliments() {
+            currentCompliment = 0;
+            updateCharacterSpeech('beforeCompliments');
+            setTimeout(() => {
+                showCompliment();
+            }, 1000);
+        }
+
+        function showCompliment() {
+            const compliment = compliments[currentCompliment];
+            document.getElementById('modalEmoji').innerHTML = compliment.emoji;
+            document.getElementById('modalTitle').innerHTML = compliment.title;
+            document.getElementById('modalSubtitle').innerHTML = 'Panda says:';
+            document.getElementById('modalText').innerHTML = compliment.text;
+            modal.style.display = 'block';
+        }
+
+        function nextCompliment() {
+            currentCompliment++;
+            if (currentCompliment >= compliments.length) {
+                // Show final message
+                document.getElementById('modalEmoji').innerHTML = '💕';
+                document.getElementById('modalTitle').innerHTML = 'Happy Valentine\'s Day, My Ladli!';
+                document.getElementById('modalSubtitle').innerHTML = 'Panda says:';
+                document.getElementById('modalText').innerHTML = 'Sakshi, from that first day at coaching to our magical moment in the rain, from Nahargarh memories to watching reels together - every moment with you has been precious. You\'re my Moti, my Ladli, my everything. I love you more than words can say! 💖🐼<br><br>P.S. - Now go watch some reels and send me those stickers! 😄';
+                document.querySelector('.next-btn').style.display = 'none';
+            } else {
+                showCompliment();
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.querySelector('.next-btn').style.display = 'inline-block';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
